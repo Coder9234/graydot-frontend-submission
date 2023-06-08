@@ -3,36 +3,40 @@ let reset = document.querySelector(".reset");
 let rightBox = document.querySelector(".right");
 let leftBox = document.querySelector(".left");
 
-for (list of lists) {
-    list.addEventListener("dragstart", (e) => {
-        let selected = e.target;
-        selected.classList.add("list-drageffect");
-        rightBox.addEventListener("dragover", (e) => {
-            console.log("dragged over")
-            e.preventDefault();
-        })
-
-        rightBox.addEventListener("drop", (e) => {
-            rightBox.appendChild(selected);
-            selected = null;
-        })
-
-        leftBox.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        })
-
-        leftBox.addEventListener("drop", (e) => {
-            leftBox.appendChild(selected);
-            selected = null;
-        })
-    })   
+// function simply used to define a list
+function listDefiner(lists) {
+    for (list of lists) {
+        list.addEventListener("dragstart", (e) => {
+            let selected = e.target;
+            selected.classList.add("list-drageffect");
+            rightBox.addEventListener("dragover", (e) => {
+                console.log("dragged over")
+                e.preventDefault();
+            })
     
-    list.addEventListener("dragend", (e) => {
-        let selected = e.target;
-        selected.classList.remove("list-drageffect");
-
-    })
+            rightBox.addEventListener("drop", (e) => {
+                rightBox.appendChild(selected);
+                selected = null;
+            })
+    
+            leftBox.addEventListener("dragover", (e) => {
+                e.preventDefault();
+            })
+    
+            leftBox.addEventListener("drop", (e) => {
+                leftBox.appendChild(selected);
+                selected = null;
+            })
+        })   
+        
+        list.addEventListener("dragend", (e) => {
+            let selected = e.target;
+            selected.classList.remove("list-drageffect");
+    
+        })
+    }
 }
+
 
 
 reset.addEventListener("click", () => {
@@ -56,4 +60,9 @@ reset.addEventListener("click", () => {
         listItem.innerHTML = `List Item ${count}`;
         leftBox.appendChild(listItem);
     }
+    lists = document.querySelectorAll(".list");
+    listDefiner(lists);
 })
+
+// call for initiating the lists
+listDefiner(lists);
